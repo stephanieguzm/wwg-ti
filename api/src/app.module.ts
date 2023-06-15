@@ -4,6 +4,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
+import { JobModule } from './job/job.module';
 
 @Module({
   imports: [
@@ -14,12 +15,11 @@ import { MongooseModule, MongooseModuleOptions } from '@nestjs/mongoose';
       useFactory: (appConfigService: AppConfigurationService) => {
         const options: MongooseModuleOptions = {
           uri: appConfigService.connectionString,
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
         };
         return options;
       },
-    })
+    }),
+    JobModule
   ],
   controllers: [AppController],
   providers: [AppService],
