@@ -1,73 +1,93 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# WWG Technical Task
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Table of Contents
+* [Overview](#overview)
+* [Technologies Used](#technologies-used)
+* [Acceptance Criteria](#acceptance-criteria)
+* [Setup](#setup)
+* [Database Objects](#database-objects)
+* [Rest Routes](#rest-routes)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Overview
+This API provides a REST endpoint for fetching non-expired jobs from a provided MongoDB database.<br>
 
-## Description
+### Technologies Used
+Project is created with:
+<p>
+<img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white">
+<img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white">
+<img src="https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white">
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Project also utilizes the `mongoose` and `@nestjs/config` packages
 
-## Installation
+## Acceptance Criteria: 
+The API should:<br>
+✔️ connect to the provided MongoDB database<br>
+✔️ provide a REST endpoint for fetching jobs<br>
+✔️ only return non-expired jobs<br>
 
-```bash
-$ npm install
-```
+## Setup
+1. From your command line, `cd` to the parent directory where your project will live
+2. Clone down this repository:
+  ```
+  git@github.com:stephanieguzm/wwg-ti.git
+  ```
+3. `cd` into the `wwg-ti/api` directory and run:
+  ```
+  yarn install
+  yarn start
+  ```
+4. Obtain a username and password to connect to the MongoDB connection URI below:
+   ```
+   mongodb+srv://<username>:<password>@stephanie.60hhy.mongodb.net/stephanie-technical-task
+   ```
+6. Update the `api` repository's `.env` file with your URI
+  ```
+  MONGODB_DB_URI="YOUR-CONNECTION-URI-HERE"
+  ```
+6. Restart the server on your command line:
+  ```
+  ctrl + c
+  yarn start
+  ```
+7. Visit the API at the following url in your browser: `http://localhost:8000/jobs`
 
-## Running the app
+## Database Objects
+### The JOB Object
+| Properties | Type  |
+|:----------- |:--------|
+|_id| string| 
+|body| string |
+|career_area_name| string | 
+|city_name|string| 
+|company_name | string| 
+|edulevels_name| { value: string, id?: string }[] | 
+|employment_type_name | string | 
+|expiredAt|  Date or null | 
+|location|  { lat: number, lon: number, coordinates: { type: 'Point', coordinates: [number, number] } } | 
+|max_salary|  number | 
+|min_edulevels_name| string | 
+|min_salary|  number | 
+|min_years_experience?|  number | 
+|onet|  string | 
+|onet_name|  string | 
+|posted|  Date | 
+|remote_type|  number | 
+|remote_type_name|  string | 
+|riasec| string[] | 
+|salary|  number | 
+|skills_name|  { value: string }[] | 
+|title_name|  string | 
+|title_raw|  string | 
+|is_earn_and_learn|  boolean | 
+|is_gateway_job|  boolean | 
+|url|  { value: string }[] | 
+|createdAt?|  Date | 
+|updatedAt?|  Date | 
 
-```bash
-# development
-$ npm run start
+## REST Routes 
+primary route: http://localhost:8000
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+| Routes | HTTP Methods| Description
+|:------- |:---------------|:--------------
+| /jobs| GET | Displays all non-expired jobs
