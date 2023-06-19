@@ -30,7 +30,7 @@ The API should:<br>
 1. From your command line, `cd` to the parent directory where your project will live
 2. Clone down this repository:
   ```
-  git@github.com:stephanieguzm/wwg-ti.git
+  git clone git@github.com:stephanieguzm/wwg-ti.git
   ```
 3. `cd` into the `wwg-ti/api` directory and run:
   ```
